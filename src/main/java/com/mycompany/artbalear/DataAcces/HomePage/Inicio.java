@@ -5,6 +5,8 @@
  */
 package com.mycompany.artbalear.DataAcces.HomePage;
 
+import com.mycompany.artbalear.DataAcces.Register.RegisterDialog;
+
 
 
 public class Inicio extends javax.swing.JFrame {
@@ -103,6 +105,7 @@ public class Inicio extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
+        //Control de cambio de pestaña Inicio-->Login
         Login login = new Login(this, false);
         this.setVisible(false);
         login.setVisible(true);
@@ -111,10 +114,12 @@ public class Inicio extends javax.swing.JFrame {
     }//GEN-LAST:event_btnLoginActionPerformed
 
     private void btnRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegisterActionPerformed
-        //Descomentar una vez añadido el panel de registro
-      /*Register register = new Register();
+        //Control de cambio de pestaña Inicio-->Registro
+        RegisterDialog register = new RegisterDialog(this, false);
         this.setVisible(false);
-        register.setVisible(true);*/
+        register.setVisible(true);
+        
+        
     }//GEN-LAST:event_btnRegisterActionPerformed
 
    
