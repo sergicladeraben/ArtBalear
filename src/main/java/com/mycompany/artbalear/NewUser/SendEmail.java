@@ -1,7 +1,6 @@
 package com.mycompany.artbalear.NewUser;
 
-package com.mkyong;
-
+import java.io.IOException;
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
@@ -9,18 +8,24 @@ import java.util.Properties;
 
 public class SendEmail {
 
-    public void sendMessage(String destinatario, String contraseña) {
+    public static void sendMessage(String destinatario, String contraseña) {
 
-        final String username = "balearart@gmail.com";
-        final String password = "CalaPilar2021";
+        Properties credencialesCorreo = new Properties();
+        try {
+            credencialesCorreo.load(SendEmail.class.getClassLoader().getResourceAsStream("application.properties"));
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
 
-        Properties prop = new Properties();
-        prop.put("mail.smtp.host", "smtp.gmail.com");
-        prop.put("mail.smtp.port", "587");
-        prop.put("mail.smtp.auth", "true");
-        prop.put("mail.smtp.starttls.enable", "true"); //TLS
+        final String username = credencialesCorreo.getProperty("correo");
+        final String password = credencialesCorreo.getProperty("password");
 
-        Session session = Session.getInstance(prop,
+        credencialesCorreo.put("mail.smtp.host", credencialesCorreo.getProperty("host"));
+        credencialesCorreo.put("mail.smtp.port", credencialesCorreo.getProperty("port"));
+        credencialesCorreo.put("mail.smtp.auth", credencialesCorreo.getProperty("auth"));
+        credencialesCorreo.put("mail.smtp.starttls.enable", credencialesCorreo.getProperty("tls"));
+
+        Session session = Session.getInstance(credencialesCorreo,
                 new javax.mail.Authenticator() {
             @Override
             protected PasswordAuthentication getPasswordAuthentication() {
@@ -31,7 +36,7 @@ public class SendEmail {
         try {
 
             Message message = new MimeMessage(session);
-            message.setFrom(new InternetAddress("balearart@gmail.com"));
+            message.setFrom(new InternetAddress(username));
             message.setRecipients(
                     Message.RecipientType.TO,
                     InternetAddress.parse(destinatario)
