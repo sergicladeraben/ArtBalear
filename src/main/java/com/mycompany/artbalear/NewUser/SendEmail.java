@@ -52,7 +52,8 @@ public class SendEmail {
 
     public static void main(String[] args) {
         SendEmail sender = new SendEmail();
-        sender.sendMessage("sergicladera@gmail.com", "njkgfbkjgfnbn");
+        //sender.sendMessage("sergicladera@gmail.com", "njkgfbkjgfnbn");
+        sender.sendMessage("lluisnoguera98@gmail.com", "hgddsss");
     }
 
 }
